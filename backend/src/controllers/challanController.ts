@@ -7,7 +7,8 @@ import {
   createDraft,
   updateDraft,
   confirmChallan,
-  cancelChallan
+  cancelChallan,
+  generateChallanPdf
 } from '../services/challanService';
 import { createChallanSchema } from '../validators/challanValidator';
 
@@ -182,5 +183,28 @@ export const cancelChallanHandler = async (req: Request, res: Response): Promise
     }
     console.error('Error in cancelChallanHandler:', error);
     res.status(500).json({ success: false, message: 'Internal server error' });
+  }
+};
+
+export const generateChallanPdfHandler = async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const id = req.params.id as string;
+    
+    // First verify they can get the challan (auth is handled by middleware, RBAC allows all 4 roles to view)
+    const challan = await getChallanById(id);
+    if (!challan) {
+      res.status(404).json({ success: false, message: 'Challan not found' });
+      return;
+    }
+
+    const pdfBuffer = await generateChallanPdf(challan);
+    
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename="${challan.challanNumber}.pdf"`);
+    res.status(200).send(pdfBuffer);
+    
+  } catch (error) {
+    console.error('Error in generateChallanPdfHandler:', error);
+    res.status(500).json({ success: false, message: 'Unable to generate PDF' });
   }
 };

@@ -1,5 +1,6 @@
 import prisma from '../config/database';
 import { Prisma, ChallanStatus, MovementType } from '@prisma/client';
+import PDFDocument from 'pdfkit';
 
 const generateChallanNumber = async (): Promise<string> => {
   const currentYear = new Date().getFullYear();
@@ -263,5 +264,96 @@ export const cancelChallan = async (id: string) => {
       where: { id },
       data: { status: ChallanStatus.CANCELLED },
     });
+  });
+};
+
+export const generateChallanPdf = (challan: any): Promise<Buffer> => {
+  return new Promise((resolve, reject) => {
+    try {
+      const doc = new PDFDocument({ margin: 50 });
+      const buffers: Buffer[] = [];
+      
+      doc.on('data', (buffer) => buffers.push(buffer));
+      doc.on('end', () => resolve(Buffer.concat(buffers)));
+      doc.on('error', (err) => reject(err));
+
+      // Header
+      doc.fontSize(20).font('Helvetica-Bold').text('PARTH MOBILE DISTRIBUTION', { align: 'center' });
+      doc.moveDown(0.5);
+      doc.fontSize(14).font('Helvetica').text('SALES CHALLAN', { align: 'center' });
+      doc.moveDown(2);
+
+      // Metadata & Customer Info Layout
+      const topY = doc.y;
+      
+      // Left Side: Challan Meta
+      doc.fontSize(10).font('Helvetica-Bold').text('Challan Information', 50, topY);
+      doc.font('Helvetica').text(`Number: ${challan.challanNumber}`, 50, topY + 15);
+      doc.text(`Date: ${new Date(challan.createdAt).toLocaleString()}`, 50, topY + 30);
+      doc.text(`Status: ${challan.status}`, 50, topY + 45);
+      doc.text(`Created By: ${challan.createdBy?.name || 'Unknown'}`, 50, topY + 60);
+
+      // Right Side: Customer Info
+      doc.font('Helvetica-Bold').text('Customer Details', 350, topY);
+      doc.font('Helvetica').text(challan.customer?.businessName || 'Unknown Customer', 350, topY + 15);
+      doc.text(challan.customer?.mobile || '', 350, topY + 30);
+      doc.text(challan.customer?.address || '', 350, topY + 45);
+
+      doc.moveDown(4);
+
+      // Table Header
+      const tableTop = doc.y + 20;
+      doc.font('Helvetica-Bold');
+      doc.text('Product', 50, tableTop);
+      doc.text('SKU', 250, tableTop);
+      doc.text('Qty', 380, tableTop, { width: 30, align: 'right' });
+      doc.text('Price', 430, tableTop, { width: 50, align: 'right' });
+      doc.text('Total', 500, tableTop, { width: 50, align: 'right' });
+
+      doc.moveTo(50, tableTop + 15).lineTo(550, tableTop + 15).stroke();
+
+      // Table Rows
+      let y = tableTop + 25;
+      doc.font('Helvetica');
+      let grandTotal = 0;
+
+      for (const item of challan.items) {
+        if (y > 700) {
+          doc.addPage();
+          y = 50;
+        }
+        const lineTotal = item.quantity * item.unitPrice;
+        grandTotal += lineTotal;
+
+        doc.text(item.productName, 50, y, { width: 190 });
+        doc.text(item.sku, 250, y, { width: 120 });
+        doc.text(item.quantity.toString(), 380, y, { width: 30, align: 'right' });
+        doc.text(item.unitPrice.toLocaleString(), 430, y, { width: 50, align: 'right' });
+        doc.text(lineTotal.toLocaleString(), 500, y, { width: 50, align: 'right' });
+        
+        y += 20;
+      }
+
+      doc.moveTo(50, y + 10).lineTo(550, y + 10).stroke();
+      
+      // Totals
+      y += 25;
+      doc.font('Helvetica-Bold');
+      doc.text('Total Quantity:', 350, y);
+      doc.text(challan.totalQuantity.toString(), 500, y, { width: 50, align: 'right' });
+      
+      y += 20;
+      doc.text('Grand Total:', 350, y);
+      doc.text(`Rs ${grandTotal.toLocaleString()}`, 450, y, { width: 100, align: 'right' });
+
+      // Footer
+      doc.font('Helvetica').fontSize(8);
+      const footerY = 750;
+      doc.text(`Generated from Parth Mobile Distribution ERP | Challan Status: ${challan.status} | Printed: ${new Date().toLocaleString()}`, 50, footerY, { align: 'center' });
+
+      doc.end();
+    } catch (error) {
+      reject(error);
+    }
   });
 };

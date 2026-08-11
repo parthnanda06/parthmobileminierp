@@ -5,7 +5,8 @@ import {
   createChallanHandler,
   updateChallanHandler,
   confirmChallanHandler,
-  cancelChallanHandler
+  cancelChallanHandler,
+  generateChallanPdfHandler
 } from '../controllers/challanController';
 import { authenticate } from '../middleware/authMiddleware';
 import { authorizeRoles } from '../middleware/roleMiddleware';
@@ -18,6 +19,7 @@ router.use(authenticate);
 // View endpoints available to all roles
 router.get('/', getChallansHandler);
 router.get('/:id', getChallanByIdHandler);
+router.get('/:id/pdf', generateChallanPdfHandler);
 
 // Mutating endpoints restricted to ADMIN and SALES
 router.post('/', authorizeRoles(Role.ADMIN, Role.SALES), createChallanHandler);

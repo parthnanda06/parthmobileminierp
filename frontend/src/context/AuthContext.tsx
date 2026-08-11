@@ -60,6 +60,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const logout = () => {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
+    
+    // Clear theme on logout so the login page resets to light mode
+    localStorage.removeItem('theme');
+    document.documentElement.classList.remove('dark');
+    
     setToken(null);
     setUser(null);
   };

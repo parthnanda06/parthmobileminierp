@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { ArrowLeft, CheckCircle, XCircle, Edit, Check } from 'lucide-react';
+import { ArrowLeft, CheckCircle, XCircle, Edit, Check, Download } from 'lucide-react';
 import api from '../utils/api';
 import { useAuth } from '../context/AuthContext';
 
@@ -19,6 +19,7 @@ export default function ChallanDetailPage() {
   const [actionLoading, setActionLoading] = useState(false);
   const [showConfirmDialog, setShowConfirmDialog] = useState(false);
   const [success, setSuccess] = useState('');
+  const [isDownloading, setIsDownloading] = useState(false);
 
   const fetchChallan = async () => {
     setLoading(true);
@@ -73,6 +74,29 @@ export default function ChallanDetailPage() {
     }
   };
 
+  const handleDownloadPdf = async () => {
+    if (isDownloading) return;
+    setIsDownloading(true);
+    try {
+      const response = await api.get(`/challans/${id}/pdf`, { responseType: 'blob' });
+      
+      const blob = new Blob([response.data], { type: 'application/pdf' });
+      const url = window.URL.createObjectURL(blob);
+      
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${challan.challanNumber}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (err: any) {
+      alert('Unable to generate challan PDF.');
+    } finally {
+      setIsDownloading(false);
+    }
+  };
+
   if (loading) return <div className="p-8 text-center text-slate-500">Loading details...</div>;
   if (error) return <div className="p-8 text-center text-red-500">{error}</div>;
   if (!challan) return null;
@@ -90,37 +114,47 @@ export default function ChallanDetailPage() {
             {challan.challanNumber}
           </h1>
           <span className={`px-3 py-1 inline-flex text-sm font-semibold rounded-full 
-            ${challan.status === 'DRAFT' ? 'bg-yellow-100 text-yellow-800' : 
-              challan.status === 'CONFIRMED' ? 'bg-green-100 text-green-800' : 
-              'bg-red-100 text-red-800'}`}>
+            ${challan.status === 'DRAFT' ? 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-200' : 
+              challan.status === 'CONFIRMED' ? 'bg-green-100 text-green-800 dark:bg-green-900/50 dark:text-green-200' : 
+              'bg-red-100 text-red-800 dark:bg-red-900/50 dark:text-red-200'}`}>
             {challan.status}
           </span>
         </div>
         
-        {challan.status === 'DRAFT' && canConfirm && (
-          <div className="flex space-x-3">
-            <Link
-              to={`/challans/${id}/edit`}
-              className="inline-flex items-center px-4 py-2 border border-slate-300 dark:border-slate-600 shadow-sm text-sm font-medium rounded-md text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:bg-slate-900/50"
-            >
-              <Edit className="h-4 w-4 mr-2" /> Edit Draft
-            </Link>
-            <button
-              onClick={handleCancel}
-              disabled={actionLoading}
-              className="inline-flex items-center px-4 py-2 border border-slate-300 dark:border-slate-600 shadow-sm text-sm font-medium rounded-md text-red-700 bg-white dark:bg-slate-800 hover:bg-red-50 disabled:opacity-50"
-            >
-              <XCircle className="h-4 w-4 mr-2" /> Cancel
-            </button>
-            <button
-              onClick={() => setShowConfirmDialog(true)}
-              disabled={actionLoading}
-              className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 disabled:opacity-50"
-            >
-              <CheckCircle className="h-4 w-4 mr-2" /> Confirm Challan
-            </button>
-          </div>
-        )}
+        <div className="flex space-x-3">
+          <button
+            onClick={handleDownloadPdf}
+            disabled={isDownloading}
+            className="inline-flex items-center px-4 py-2 border border-slate-300 dark:border-slate-600 shadow-sm text-sm font-medium rounded-md text-blue-700 dark:text-blue-300 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:bg-slate-900/50 disabled:opacity-50"
+          >
+            <Download className="h-4 w-4 mr-2" /> {isDownloading ? 'Generating PDF...' : 'Download PDF'}
+          </button>
+
+          {challan.status === 'DRAFT' && canConfirm && (
+            <>
+              <Link
+                to={`/challans/${id}/edit`}
+                className="inline-flex items-center px-4 py-2 border border-slate-300 dark:border-slate-600 shadow-sm text-sm font-medium rounded-md text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:bg-slate-900/50"
+              >
+                <Edit className="h-4 w-4 mr-2" /> Edit Draft
+              </Link>
+              <button
+                onClick={handleCancel}
+                disabled={actionLoading}
+                className="inline-flex items-center px-4 py-2 border border-slate-300 dark:border-slate-600 shadow-sm text-sm font-medium rounded-md text-red-700 dark:text-red-300 bg-white dark:bg-slate-800 hover:bg-red-50 dark:hover:bg-red-900/50 disabled:opacity-50"
+              >
+                <XCircle className="h-4 w-4 mr-2" /> Cancel
+              </button>
+              <button
+                onClick={() => setShowConfirmDialog(true)}
+                disabled={actionLoading}
+                className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-green-600 hover:bg-green-700 disabled:opacity-50"
+              >
+                <CheckCircle className="h-4 w-4 mr-2" /> Confirm Challan
+              </button>
+            </>
+          )}
+        </div>
       </div>
 
       {success && (
