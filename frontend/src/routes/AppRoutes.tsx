@@ -2,7 +2,6 @@ import { Routes, Route } from 'react-router-dom';
 import MainLayout from '../layouts/MainLayout';
 import LoginPage from '../pages/LoginPage';
 import DashboardPage from '../pages/DashboardPage';
-import PlaceholderPage from '../pages/PlaceholderPage';
 import CustomersPage from '../pages/CustomersPage';
 import CustomerDetailPage from '../pages/CustomerDetailPage';
 import ProductsPage from '../pages/ProductsPage';
@@ -13,6 +12,8 @@ import ChallanFormPage from '../pages/ChallanFormPage';
 import ChallanDetailPage from '../pages/ChallanDetailPage';
 import UsersPage from '../pages/UsersPage';
 import ProtectedRoute from '../components/ProtectedRoute';
+import ReportsPage from '../pages/ReportsPage';
+import SettingsPage from '../pages/SettingsPage';
 
 export default function AppRoutes() {
   return (
@@ -48,8 +49,8 @@ export default function AppRoutes() {
             <Route path="/challans/:id/edit" element={<ChallanFormPage />} />
           </Route>
 
-          <Route path="/reports" element={<PlaceholderPage title="Reports" description="View business reports." />} />
-          <Route path="/settings" element={<PlaceholderPage title="Settings" description="Application settings." />} />
+          <Route path="/reports" element={<ReportsPage />} />
+          <Route path="/settings" element={<SettingsPage />} />
         </Route>
       </Route>
     </Routes>

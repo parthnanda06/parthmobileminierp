@@ -29,6 +29,7 @@ const navigationByRole = {
     { name: 'Customers', path: '/customers', icon: Users },
     { name: 'Sales Challans', path: '/challans', icon: FileText },
     { name: 'Reports', path: '/reports', icon: PieChart },
+    { name: 'Settings', path: '/settings', icon: Settings },
   ],
   WAREHOUSE: [
     { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
@@ -37,11 +38,13 @@ const navigationByRole = {
     { name: 'Stock Movements', path: '/stock-movements', icon: ArrowRightLeft },
     { name: 'Sales Challans', path: '/challans', icon: FileText },
     { name: 'Reports', path: '/reports', icon: PieChart },
+    { name: 'Settings', path: '/settings', icon: Settings },
   ],
   ACCOUNTS: [
     { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
     { name: 'Sales Challans', path: '/challans', icon: FileText },
     { name: 'Reports', path: '/reports', icon: PieChart },
+    { name: 'Settings', path: '/settings', icon: Settings },
   ]
 };
 
