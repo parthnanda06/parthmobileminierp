@@ -50,7 +50,7 @@ export default function InventoryPage() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Inventory</h1>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Inventory</h1>
           <p className="mt-1 text-sm text-slate-500">
             Monitor warehouse stock levels and movements.
           </p>
@@ -67,7 +67,7 @@ export default function InventoryPage() {
       </div>
 
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        <div className="bg-white overflow-hidden shadow rounded-lg border border-slate-200">
+        <div className="bg-white dark:bg-slate-800 overflow-hidden shadow rounded-lg border border-slate-200 dark:border-slate-700">
           <div className="p-5">
             <div className="flex items-center">
               <div className="flex-shrink-0 bg-blue-100 rounded-md p-3">
@@ -76,14 +76,14 @@ export default function InventoryPage() {
               <div className="ml-5 w-0 flex-1">
                 <dl>
                   <dt className="text-sm font-medium text-slate-500 truncate">Total Products</dt>
-                  <dd className="flex items-baseline"><div className="text-2xl font-semibold text-slate-900">{totalProducts}</div></dd>
+                  <dd className="flex items-baseline"><div className="text-2xl font-semibold text-slate-900 dark:text-slate-100">{totalProducts}</div></dd>
                 </dl>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="bg-white overflow-hidden shadow rounded-lg border border-slate-200">
+        <div className="bg-white dark:bg-slate-800 overflow-hidden shadow rounded-lg border border-slate-200 dark:border-slate-700">
           <div className="p-5">
             <div className="flex items-center">
               <div className="flex-shrink-0 bg-indigo-100 rounded-md p-3">
@@ -92,14 +92,14 @@ export default function InventoryPage() {
               <div className="ml-5 w-0 flex-1">
                 <dl>
                   <dt className="text-sm font-medium text-slate-500 truncate">Total Units</dt>
-                  <dd className="flex items-baseline"><div className="text-2xl font-semibold text-slate-900">{totalUnits}</div></dd>
+                  <dd className="flex items-baseline"><div className="text-2xl font-semibold text-slate-900 dark:text-slate-100">{totalUnits}</div></dd>
                 </dl>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="bg-white overflow-hidden shadow rounded-lg border border-slate-200">
+        <div className="bg-white dark:bg-slate-800 overflow-hidden shadow rounded-lg border border-slate-200 dark:border-slate-700">
           <div className="p-5">
             <div className="flex items-center">
               <div className="flex-shrink-0 bg-red-100 rounded-md p-3">
@@ -108,14 +108,14 @@ export default function InventoryPage() {
               <div className="ml-5 w-0 flex-1">
                 <dl>
                   <dt className="text-sm font-medium text-slate-500 truncate">Low Stock Items</dt>
-                  <dd className="flex items-baseline"><div className="text-2xl font-semibold text-slate-900">{lowStockItems}</div></dd>
+                  <dd className="flex items-baseline"><div className="text-2xl font-semibold text-slate-900 dark:text-slate-100">{lowStockItems}</div></dd>
                 </dl>
               </div>
             </div>
           </div>
         </div>
 
-        <div className="bg-white overflow-hidden shadow rounded-lg border border-slate-200">
+        <div className="bg-white dark:bg-slate-800 overflow-hidden shadow rounded-lg border border-slate-200 dark:border-slate-700">
           <div className="p-5">
             <div className="flex items-center">
               <div className="flex-shrink-0 bg-green-100 rounded-md p-3">
@@ -124,7 +124,7 @@ export default function InventoryPage() {
               <div className="ml-5 w-0 flex-1">
                 <dl>
                   <dt className="text-sm font-medium text-slate-500 truncate">Stock In Today</dt>
-                  <dd className="flex items-baseline"><div className="text-sm font-semibold text-slate-900 mt-1">{stockInToday}</div></dd>
+                  <dd className="flex items-baseline"><div className="text-sm font-semibold text-slate-900 dark:text-slate-100 mt-1">{stockInToday}</div></dd>
                 </dl>
               </div>
             </div>
@@ -132,7 +132,7 @@ export default function InventoryPage() {
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow border border-slate-200">
+      <div className="bg-white dark:bg-slate-800 rounded-lg shadow border border-slate-200 dark:border-slate-700">
         {error ? (
           <div className="p-8 text-center text-red-500">
             <p>{error}</p>
@@ -144,8 +144,8 @@ export default function InventoryPage() {
           <div className="p-8 text-center text-slate-500">No inventory found.</div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-slate-200">
-              <thead className="bg-slate-50">
+            <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
+              <thead className="bg-slate-50 dark:bg-slate-900/50">
                 <tr>
                   <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Product</th>
                   <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">SKU</th>
@@ -155,14 +155,14 @@ export default function InventoryPage() {
                   <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Warehouse</th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-slate-200">
+              <tbody className="bg-white dark:bg-slate-800 divide-y divide-slate-200 dark:divide-slate-700">
                 {products.map((product) => {
                   const isLowStock = product.currentStock <= product.minimumStock;
                   return (
-                    <tr key={product.id} className="hover:bg-slate-50">
-                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">{product.productName}</td>
+                    <tr key={product.id} className="hover:bg-slate-50 dark:bg-slate-900/50">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-slate-100">{product.productName}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">{product.sku}</td>
-                      <td className={`px-6 py-4 whitespace-nowrap text-sm font-bold ${isLowStock ? 'text-red-600' : 'text-slate-900'}`}>{product.currentStock}</td>
+                      <td className={`px-6 py-4 whitespace-nowrap text-sm font-bold ${isLowStock ? 'text-red-600' : 'text-slate-900 dark:text-slate-100'}`}>{product.currentStock}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">{product.minimumStock}</td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 

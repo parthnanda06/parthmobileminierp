@@ -36,11 +36,11 @@ export default function ReportsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Reports</h1>
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Reports</h1>
         <p className="mt-1 text-sm text-slate-500">Operational insights across customers, inventory and sales challans.</p>
       </div>
 
-      <div className="border-b border-slate-200">
+      <div className="border-b border-slate-200 dark:border-slate-700">
         <nav className="-mb-px flex space-x-8" aria-label="Tabs">
           {availableReports.map((report) => (
             <button
@@ -50,7 +50,7 @@ export default function ReportsPage() {
                 whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm
                 ${activeTab === report.id
                   ? 'border-blue-500 text-blue-600'
-                  : 'border-transparent text-slate-500 hover:text-slate-700 hover:border-slate-300'
+                  : 'border-transparent text-slate-500 hover:text-slate-700 dark:text-slate-300 hover:border-slate-300 dark:border-slate-600'
                 }
               `}
             >

@@ -140,10 +140,10 @@ export default function ChallanFormPage() {
   return (
     <div className="space-y-6 max-w-5xl mx-auto">
       <div className="flex items-center space-x-4">
-        <button onClick={() => navigate(-1)} className="text-slate-500 hover:text-slate-700">
+        <button onClick={() => navigate(-1)} className="text-slate-500 hover:text-slate-700 dark:text-slate-300">
           <ArrowLeft className="h-6 w-6" />
         </button>
-        <h1 className="text-2xl font-bold text-slate-900">
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
           {isEdit ? 'Edit Sales Challan (Draft)' : 'Create Sales Challan'}
         </h1>
       </div>
@@ -159,15 +159,15 @@ export default function ChallanFormPage() {
         </div>
       )}
 
-      <div className="bg-white rounded-lg shadow border border-slate-200 overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 rounded-lg shadow border border-slate-200 dark:border-slate-700 overflow-hidden">
         <div className="p-6 space-y-6">
           
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Customer *</label>
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Customer *</label>
             <select
               value={customerId}
               onChange={(e) => setCustomerId(e.target.value)}
-              className="mt-1 block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border bg-white"
+              className="mt-1 block w-full rounded-md border-slate-300 dark:border-slate-600 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border bg-white dark:bg-slate-800"
             >
               <option value="">[ Select Customer ]</option>
               {customers.map(c => (
@@ -176,15 +176,15 @@ export default function ChallanFormPage() {
             </select>
           </div>
 
-          <div className="border-t border-slate-200 pt-6">
-            <h3 className="text-lg font-medium text-slate-900 mb-4">Add Products</h3>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end bg-slate-50 p-4 rounded-md border border-slate-200">
+          <div className="border-t border-slate-200 dark:border-slate-700 pt-6">
+            <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100 mb-4">Add Products</h3>
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 items-end bg-slate-50 dark:bg-slate-900/50 p-4 rounded-md border border-slate-200 dark:border-slate-700">
               <div className="md:col-span-2">
-                <label className="block text-sm font-medium text-slate-700 mb-1">Product</label>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Product</label>
                 <select
                   value={selectedProductId}
                   onChange={(e) => setSelectedProductId(e.target.value)}
-                  className="block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border bg-white"
+                  className="block w-full rounded-md border-slate-300 dark:border-slate-600 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border bg-white dark:bg-slate-800"
                 >
                   <option value="">[ Select Product ]</option>
                   {products.map(p => (
@@ -198,13 +198,13 @@ export default function ChallanFormPage() {
                 )}
               </div>
               <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">Quantity</label>
+                <label className="block text-sm font-medium text-slate-700 dark:text-slate-300 mb-1">Quantity</label>
                 <input
                   type="number"
                   min="1"
                   value={selectedQuantity}
                   onChange={(e) => setSelectedQuantity(e.target.value)}
-                  className="block w-full rounded-md border-slate-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border bg-white"
+                  className="block w-full rounded-md border-slate-300 dark:border-slate-600 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm p-2 border bg-white dark:bg-slate-800"
                 />
               </div>
               <div>
@@ -220,16 +220,16 @@ export default function ChallanFormPage() {
             </div>
           </div>
 
-          <div className="border-t border-slate-200 pt-6">
-            <h3 className="text-lg font-medium text-slate-900 mb-4">Challan Items</h3>
+          <div className="border-t border-slate-200 dark:border-slate-700 pt-6">
+            <h3 className="text-lg font-medium text-slate-900 dark:text-slate-100 mb-4">Challan Items</h3>
             {items.length === 0 ? (
-              <div className="text-center p-6 border-2 border-dashed border-slate-300 rounded-md text-slate-500">
+              <div className="text-center p-6 border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-md text-slate-500">
                 No products added yet.
               </div>
             ) : (
-              <div className="overflow-x-auto border border-slate-200 rounded-md">
-                <table className="min-w-full divide-y divide-slate-200">
-                  <thead className="bg-slate-50">
+              <div className="overflow-x-auto border border-slate-200 dark:border-slate-700 rounded-md">
+                <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
+                  <thead className="bg-slate-50 dark:bg-slate-900/50">
                     <tr>
                       <th className="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase">Product</th>
                       <th className="px-4 py-3 text-left text-xs font-medium text-slate-500 uppercase">SKU</th>
@@ -240,15 +240,15 @@ export default function ChallanFormPage() {
                       <th className="px-4 py-3 text-center text-xs font-medium text-slate-500 uppercase">Action</th>
                     </tr>
                   </thead>
-                  <tbody className="bg-white divide-y divide-slate-200">
+                  <tbody className="bg-white dark:bg-slate-800 divide-y divide-slate-200 dark:divide-slate-700">
                     {items.map((item) => (
                       <tr key={item.productId}>
-                        <td className="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900">{item.productDetails?.productName}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-slate-100">{item.productDetails?.productName}</td>
                         <td className="px-4 py-3 whitespace-nowrap text-sm text-slate-500">{item.productDetails?.sku}</td>
                         <td className="px-4 py-3 whitespace-nowrap text-sm text-slate-500 text-right">{item.productDetails?.currentStock}</td>
                         <td className="px-4 py-3 whitespace-nowrap text-sm text-slate-500 text-right">₹{item.productDetails?.unitPrice.toLocaleString()}</td>
-                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-slate-900 text-right">{item.quantity}</td>
-                        <td className="px-4 py-3 whitespace-nowrap text-sm text-slate-900 text-right font-medium">
+                        <td className="px-4 py-3 whitespace-nowrap text-sm font-semibold text-slate-900 dark:text-slate-100 text-right">{item.quantity}</td>
+                        <td className="px-4 py-3 whitespace-nowrap text-sm text-slate-900 dark:text-slate-100 text-right font-medium">
                           ₹{(item.quantity * item.productDetails?.unitPrice).toLocaleString()}
                         </td>
                         <td className="px-4 py-3 whitespace-nowrap text-center text-sm font-medium">
@@ -264,22 +264,22 @@ export default function ChallanFormPage() {
             )}
           </div>
           
-          <div className="bg-slate-50 p-4 rounded-md border border-slate-200 flex justify-end space-x-12">
+          <div className="bg-slate-50 dark:bg-slate-900/50 p-4 rounded-md border border-slate-200 dark:border-slate-700 flex justify-end space-x-12">
             <div className="text-right">
               <p className="text-sm text-slate-500">Total Quantity</p>
-              <p className="text-xl font-bold text-slate-900">{totalQuantity}</p>
+              <p className="text-xl font-bold text-slate-900 dark:text-slate-100">{totalQuantity}</p>
             </div>
             <div className="text-right">
               <p className="text-sm text-slate-500">Grand Total</p>
-              <p className="text-xl font-bold text-slate-900">₹{grandTotal.toLocaleString()}</p>
+              <p className="text-xl font-bold text-slate-900 dark:text-slate-100">₹{grandTotal.toLocaleString()}</p>
             </div>
           </div>
           
         </div>
-        <div className="bg-slate-50 px-6 py-4 border-t border-slate-200 flex justify-end space-x-3">
+        <div className="bg-slate-50 dark:bg-slate-900/50 px-6 py-4 border-t border-slate-200 dark:border-slate-700 flex justify-end space-x-3">
           <button
             onClick={() => navigate('/challans')}
-            className="px-4 py-2 border border-slate-300 shadow-sm text-sm font-medium rounded-md text-slate-700 bg-white hover:bg-slate-50"
+            className="px-4 py-2 border border-slate-300 dark:border-slate-600 shadow-sm text-sm font-medium rounded-md text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:bg-slate-900/50"
           >
             Cancel
           </button>

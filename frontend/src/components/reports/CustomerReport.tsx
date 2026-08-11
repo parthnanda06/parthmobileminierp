@@ -58,57 +58,57 @@ export default function CustomerReport() {
     <div className="space-y-6">
       {/* Summary Cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+        <div className="bg-white dark:bg-slate-800 p-4 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
           <p className="text-sm text-slate-500 font-medium mb-1">Total Customers</p>
           <div className="flex items-center">
             <Users className="h-5 w-5 text-blue-500 mr-2" />
-            <p className="text-2xl font-bold text-slate-900">{data.summary.totalCustomers}</p>
+            <p className="text-2xl font-bold text-slate-900 dark:text-slate-100">{data.summary.totalCustomers}</p>
           </div>
         </div>
-        <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+        <div className="bg-white dark:bg-slate-800 p-4 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
           <p className="text-sm text-slate-500 font-medium mb-1">Active</p>
           <div className="flex items-center">
             <UserCheck className="h-5 w-5 text-green-500 mr-2" />
-            <p className="text-2xl font-bold text-slate-900">{data.summary.activeCustomers}</p>
+            <p className="text-2xl font-bold text-slate-900 dark:text-slate-100">{data.summary.activeCustomers}</p>
           </div>
         </div>
-        <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+        <div className="bg-white dark:bg-slate-800 p-4 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
           <p className="text-sm text-slate-500 font-medium mb-1">Leads</p>
           <div className="flex items-center">
             <UserPlus className="h-5 w-5 text-amber-500 mr-2" />
-            <p className="text-2xl font-bold text-slate-900">{data.summary.leadCustomers}</p>
+            <p className="text-2xl font-bold text-slate-900 dark:text-slate-100">{data.summary.leadCustomers}</p>
           </div>
         </div>
-        <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+        <div className="bg-white dark:bg-slate-800 p-4 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
           <p className="text-sm text-slate-500 font-medium mb-1">Inactive</p>
           <div className="flex items-center">
             <UserX className="h-5 w-5 text-red-500 mr-2" />
-            <p className="text-2xl font-bold text-slate-900">{data.summary.inactiveCustomers}</p>
+            <p className="text-2xl font-bold text-slate-900 dark:text-slate-100">{data.summary.inactiveCustomers}</p>
           </div>
         </div>
       </div>
 
       <div className="flex space-x-6 text-sm text-slate-500">
-        <span>Retail: <strong className="text-slate-700">{data.summary.retailCount}</strong></span>
-        <span>Wholesale: <strong className="text-slate-700">{data.summary.wholesaleCount}</strong></span>
-        <span>Distributor: <strong className="text-slate-700">{data.summary.distributorCount}</strong></span>
+        <span>Retail: <strong className="text-slate-700 dark:text-slate-300">{data.summary.retailCount}</strong></span>
+        <span>Wholesale: <strong className="text-slate-700 dark:text-slate-300">{data.summary.wholesaleCount}</strong></span>
+        <span>Distributor: <strong className="text-slate-700 dark:text-slate-300">{data.summary.distributorCount}</strong></span>
       </div>
 
       {/* Filters */}
-      <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex flex-wrap gap-4 items-end">
+      <div className="bg-white dark:bg-slate-800 p-4 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm flex flex-wrap gap-4 items-end">
         <div className="flex-1 min-w-[200px]">
-          <label className="block text-xs font-medium text-slate-700 mb-1">Search</label>
+          <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">Search</label>
           <input 
             type="text" 
             placeholder="Search by name, business or mobile..."
             value={search} 
             onChange={e => setSearch(e.target.value)} 
-            className="block w-full border border-slate-300 rounded-md py-2 px-3 text-sm" 
+            className="block w-full border border-slate-300 dark:border-slate-600 rounded-md py-2 px-3 text-sm" 
           />
         </div>
         <div>
-          <label className="block text-xs font-medium text-slate-700 mb-1">Status</label>
-          <select value={status} onChange={e => setStatus(e.target.value)} className="block w-full border border-slate-300 rounded-md py-2 px-3 text-sm">
+          <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">Status</label>
+          <select value={status} onChange={e => setStatus(e.target.value)} className="block w-full border border-slate-300 dark:border-slate-600 rounded-md py-2 px-3 text-sm">
             <option value="ALL">All Statuses</option>
             <option value="ACTIVE">Active</option>
             <option value="LEAD">Lead</option>
@@ -116,8 +116,8 @@ export default function CustomerReport() {
           </select>
         </div>
         <div>
-          <label className="block text-xs font-medium text-slate-700 mb-1">Customer Type</label>
-          <select value={customerType} onChange={e => setCustomerType(e.target.value)} className="block w-full border border-slate-300 rounded-md py-2 px-3 text-sm">
+          <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">Customer Type</label>
+          <select value={customerType} onChange={e => setCustomerType(e.target.value)} className="block w-full border border-slate-300 dark:border-slate-600 rounded-md py-2 px-3 text-sm">
             <option value="ALL">All Types</option>
             <option value="RETAIL">Retail</option>
             <option value="WHOLESALE">Wholesale</option>
@@ -127,13 +127,13 @@ export default function CustomerReport() {
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
         {data.data.length === 0 ? (
           <div className="p-8 text-center text-slate-500">No records found for the selected filters.</div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-slate-200">
-              <thead className="bg-slate-50">
+            <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
+              <thead className="bg-slate-50 dark:bg-slate-900/50">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Customer</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Business</th>
@@ -143,10 +143,10 @@ export default function CustomerReport() {
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Follow-up Date</th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-slate-200">
+              <tbody className="bg-white dark:bg-slate-800 divide-y divide-slate-200 dark:divide-slate-700">
                 {data.data.map((c: any) => (
                   <tr key={c.id}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">{c.customerName}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-slate-100">{c.customerName}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">{c.businessName}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">{c.customerType}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-center">

@@ -41,7 +41,7 @@ export default function DashboardPage() {
       { title: 'Total Products', value: metrics.totalProducts, icon: Package, color: 'text-indigo-600', bg: 'bg-indigo-100' },
       { title: 'Total Stock Units', value: metrics.totalStockUnits, icon: Inbox, color: 'text-purple-600', bg: 'bg-purple-100' },
       { title: 'Low Stock Alerts', value: metrics.lowStockProducts, icon: AlertTriangle, color: 'text-red-600', bg: 'bg-red-100' },
-      { title: 'Total Challans', value: metrics.totalChallans, icon: FileText, color: 'text-slate-600', bg: 'bg-slate-100' },
+      { title: 'Total Challans', value: metrics.totalChallans, icon: FileText, color: 'text-slate-600 dark:text-slate-400', bg: 'bg-slate-100 dark:bg-slate-700/50' },
       { title: 'Confirmed Challans', value: metrics.confirmedChallans, icon: TrendingUp, color: 'text-green-600', bg: 'bg-green-100' },
       { title: 'Draft Challans', value: metrics.draftChallans, icon: Activity, color: 'text-yellow-600', bg: 'bg-yellow-100' },
     ];
@@ -51,7 +51,7 @@ export default function DashboardPage() {
         {kpis.map((item) => {
           const Icon = item.icon;
           return (
-            <div key={item.title} className="bg-white overflow-hidden rounded-xl border border-slate-200 shadow-sm transition-all hover:shadow-md">
+            <div key={item.title} className="bg-white dark:bg-slate-800 overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm transition-all hover:shadow-md">
               <div className="p-5">
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
@@ -63,7 +63,7 @@ export default function DashboardPage() {
                     <dl>
                       <dt className="truncate text-sm font-medium text-slate-500">{item.title}</dt>
                       <dd>
-                        <div className="text-lg font-bold text-slate-900">{item.value}</div>
+                        <div className="text-lg font-bold text-slate-900 dark:text-slate-100">{item.value}</div>
                       </dd>
                     </dl>
                   </div>
@@ -89,7 +89,7 @@ export default function DashboardPage() {
         {kpis.map((item) => {
           const Icon = item.icon;
           return (
-            <div key={item.title} className="bg-white overflow-hidden rounded-xl border border-slate-200 shadow-sm transition-all hover:shadow-md">
+            <div key={item.title} className="bg-white dark:bg-slate-800 overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm transition-all hover:shadow-md">
               <div className="p-5">
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
@@ -101,7 +101,7 @@ export default function DashboardPage() {
                     <dl>
                       <dt className="truncate text-sm font-medium text-slate-500">{item.title}</dt>
                       <dd>
-                        <div className="text-lg font-bold text-slate-900">{item.value}</div>
+                        <div className="text-lg font-bold text-slate-900 dark:text-slate-100">{item.value}</div>
                       </dd>
                     </dl>
                   </div>
@@ -128,7 +128,7 @@ export default function DashboardPage() {
         {kpis.map((item) => {
           const Icon = item.icon;
           return (
-            <div key={item.title} className="bg-white overflow-hidden rounded-xl border border-slate-200 shadow-sm transition-all hover:shadow-md">
+            <div key={item.title} className="bg-white dark:bg-slate-800 overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm transition-all hover:shadow-md">
               <div className="p-5">
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
@@ -140,7 +140,7 @@ export default function DashboardPage() {
                     <dl>
                       <dt className="truncate text-sm font-medium text-slate-500">{item.title}</dt>
                       <dd>
-                        <div className="text-lg font-bold text-slate-900">{item.value}</div>
+                        <div className="text-lg font-bold text-slate-900 dark:text-slate-100">{item.value}</div>
                       </dd>
                     </dl>
                   </div>
@@ -155,7 +155,7 @@ export default function DashboardPage() {
 
   const renderAccountsDashboard = () => {
     const kpis = [
-      { title: 'Total Challans', value: metrics.totalChallans, icon: FileText, color: 'text-slate-600', bg: 'bg-slate-100' },
+      { title: 'Total Challans', value: metrics.totalChallans, icon: FileText, color: 'text-slate-600 dark:text-slate-400', bg: 'bg-slate-100 dark:bg-slate-700/50' },
       { title: 'Confirmed', value: metrics.confirmedChallans, icon: TrendingUp, color: 'text-green-600', bg: 'bg-green-100' },
       { title: 'Drafts', value: metrics.draftChallans, icon: Activity, color: 'text-yellow-600', bg: 'bg-yellow-100' },
       { title: 'Cancelled', value: metrics.cancelledChallans, icon: AlertTriangle, color: 'text-red-600', bg: 'bg-red-100' },
@@ -166,7 +166,7 @@ export default function DashboardPage() {
         {kpis.map((item) => {
           const Icon = item.icon;
           return (
-            <div key={item.title} className="bg-white overflow-hidden rounded-xl border border-slate-200 shadow-sm transition-all hover:shadow-md">
+            <div key={item.title} className="bg-white dark:bg-slate-800 overflow-hidden rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm transition-all hover:shadow-md">
               <div className="p-5">
                 <div className="flex items-center">
                   <div className="flex-shrink-0">
@@ -178,7 +178,7 @@ export default function DashboardPage() {
                     <dl>
                       <dt className="truncate text-sm font-medium text-slate-500">{item.title}</dt>
                       <dd>
-                        <div className="text-lg font-bold text-slate-900">{item.value}</div>
+                        <div className="text-lg font-bold text-slate-900 dark:text-slate-100">{item.value}</div>
                       </dd>
                     </dl>
                   </div>
@@ -194,7 +194,7 @@ export default function DashboardPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Welcome, {user?.name}</h1>
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Welcome, {user?.name}</h1>
         <p className="mt-1 text-sm text-slate-500">Here is your {role.toLowerCase()} overview.</p>
       </div>
 

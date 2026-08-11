@@ -70,24 +70,24 @@ export default function StockMovementsPage() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">Stock Movements</h1>
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Stock Movements</h1>
           <p className="mt-1 text-sm text-slate-500">
             Track inward and outward stock history.
           </p>
         </div>
       </div>
 
-      <div className="bg-white rounded-lg shadow border border-slate-200">
-        <div className="p-4 border-b border-slate-200 bg-slate-50 flex flex-col sm:flex-row sm:items-center space-y-3 sm:space-y-0 sm:space-x-4">
+      <div className="bg-white dark:bg-slate-800 rounded-lg shadow border border-slate-200 dark:border-slate-700">
+        <div className="p-4 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 flex flex-col sm:flex-row sm:items-center space-y-3 sm:space-y-0 sm:space-x-4">
           <div className="flex items-center space-x-2">
             <ArrowRightLeft className="h-5 w-5 text-slate-400" />
-            <span className="text-sm font-medium text-slate-700">Filter:</span>
+            <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Filter:</span>
           </div>
           <div className="w-full sm:w-48">
             <select
               value={typeFilter}
               onChange={(e) => setTypeFilter(e.target.value)}
-              className="block w-full pl-3 pr-10 py-2 text-base border-slate-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
+              className="block w-full pl-3 pr-10 py-2 text-base border-slate-300 dark:border-slate-600 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"
             >
               <option value="ALL">All Movements</option>
               <option value="IN">Stock IN</option>
@@ -109,8 +109,8 @@ export default function StockMovementsPage() {
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-slate-200">
-              <thead className="bg-slate-50">
+            <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
+              <thead className="bg-slate-50 dark:bg-slate-900/50">
                 <tr>
                   <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Date & Time</th>
                   <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Product</th>
@@ -120,16 +120,16 @@ export default function StockMovementsPage() {
                   <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Created By</th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-slate-200">
+              <tbody className="bg-white dark:bg-slate-800 divide-y divide-slate-200 dark:divide-slate-700">
                 {movements.map((movement) => {
                   const isIN = movement.movementType === 'IN';
                   return (
-                    <tr key={movement.id} className="hover:bg-slate-50">
+                    <tr key={movement.id} className="hover:bg-slate-50 dark:bg-slate-900/50">
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
                         {formatDate(movement.createdAt)}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm font-medium text-slate-900">{movement.product?.productName}</div>
+                        <div className="text-sm font-medium text-slate-900 dark:text-slate-100">{movement.product?.productName}</div>
                         <div className="text-sm text-slate-500">{movement.product?.sku}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
@@ -146,7 +146,7 @@ export default function StockMovementsPage() {
                         {movement.reason}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-slate-900">{movement.createdBy?.name}</div>
+                        <div className="text-sm text-slate-900 dark:text-slate-100">{movement.createdBy?.name}</div>
                         <div className="text-xs text-slate-500">{movement.createdBy?.role}</div>
                       </td>
                     </tr>
@@ -159,10 +159,10 @@ export default function StockMovementsPage() {
 
         {/* Pagination */}
         {!loading && movements.length > 0 && (
-          <div className="px-4 py-3 border-t border-slate-200 flex items-center justify-between sm:px-6">
+          <div className="px-4 py-3 border-t border-slate-200 dark:border-slate-700 flex items-center justify-between sm:px-6">
             <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
               <div>
-                <p className="text-sm text-slate-700">
+                <p className="text-sm text-slate-700 dark:text-slate-300">
                   Showing <span className="font-medium">{(pagination.page - 1) * pagination.limit + 1}</span> to <span className="font-medium">{Math.min(pagination.page * pagination.limit, pagination.total)}</span> of <span className="font-medium">{pagination.total}</span> movements
                 </p>
               </div>
@@ -171,7 +171,7 @@ export default function StockMovementsPage() {
                   <button
                     onClick={() => handlePageChange(pagination.page - 1)}
                     disabled={pagination.page === 1}
-                    className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-slate-300 bg-white text-sm font-medium text-slate-500 hover:bg-slate-50 disabled:opacity-50"
+                    className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-sm font-medium text-slate-500 hover:bg-slate-50 dark:bg-slate-900/50 disabled:opacity-50"
                   >
                     Previous
                   </button>
@@ -182,7 +182,7 @@ export default function StockMovementsPage() {
                       className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
                         pagination.page === i + 1 
                           ? 'z-10 bg-blue-50 border-blue-500 text-blue-600' 
-                          : 'bg-white border-slate-300 text-slate-500 hover:bg-slate-50'
+                          : 'bg-white dark:bg-slate-800 border-slate-300 dark:border-slate-600 text-slate-500 hover:bg-slate-50 dark:bg-slate-900/50'
                       }`}
                     >
                       {i + 1}
@@ -191,7 +191,7 @@ export default function StockMovementsPage() {
                   <button
                     onClick={() => handlePageChange(pagination.page + 1)}
                     disabled={pagination.page === pagination.totalPages}
-                    className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-slate-300 bg-white text-sm font-medium text-slate-500 hover:bg-slate-50 disabled:opacity-50"
+                    className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-sm font-medium text-slate-500 hover:bg-slate-50 dark:bg-slate-900/50 disabled:opacity-50"
                   >
                     Next
                   </button>

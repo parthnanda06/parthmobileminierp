@@ -10,7 +10,7 @@ export default function SettingsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Settings</h1>
+        <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">Settings</h1>
         <p className="mt-1 text-sm text-slate-500">Manage your profile, security, and view system information.</p>
       </div>
 
@@ -20,7 +20,7 @@ export default function SettingsPage() {
             <button
               onClick={() => setActiveTab('profile')}
               className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-md ${
-                activeTab === 'profile' ? 'bg-blue-50 text-blue-700' : 'text-slate-700 hover:bg-slate-50'
+                activeTab === 'profile' ? 'bg-blue-50 text-blue-700' : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:bg-slate-900/50'
               }`}
             >
               <User className="flex-shrink-0 -ml-1 mr-3 h-5 w-5" />
@@ -29,7 +29,7 @@ export default function SettingsPage() {
             <button
               onClick={() => setActiveTab('security')}
               className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-md ${
-                activeTab === 'security' ? 'bg-blue-50 text-blue-700' : 'text-slate-700 hover:bg-slate-50'
+                activeTab === 'security' ? 'bg-blue-50 text-blue-700' : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:bg-slate-900/50'
               }`}
             >
               <Lock className="flex-shrink-0 -ml-1 mr-3 h-5 w-5" />
@@ -38,7 +38,7 @@ export default function SettingsPage() {
             <button
               onClick={() => setActiveTab('system')}
               className={`w-full flex items-center px-3 py-2 text-sm font-medium rounded-md ${
-                activeTab === 'system' ? 'bg-blue-50 text-blue-700' : 'text-slate-700 hover:bg-slate-50'
+                activeTab === 'system' ? 'bg-blue-50 text-blue-700' : 'text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:bg-slate-900/50'
               }`}
             >
               <Server className="flex-shrink-0 -ml-1 mr-3 h-5 w-5" />
@@ -86,9 +86,9 @@ function ProfileTab({ user, login }: { user: any, login: any }) {
   };
 
   return (
-    <div className="bg-white shadow rounded-lg border border-slate-200">
+    <div className="bg-white dark:bg-slate-800 shadow rounded-lg border border-slate-200 dark:border-slate-700">
       <div className="px-4 py-5 sm:p-6">
-        <h3 className="text-lg leading-6 font-medium text-slate-900">Profile</h3>
+        <h3 className="text-lg leading-6 font-medium text-slate-900 dark:text-slate-100">Profile</h3>
         <div className="mt-2 max-w-xl text-sm text-slate-500">
           <p>Update your personal information.</p>
         </div>
@@ -98,40 +98,40 @@ function ProfileTab({ user, login }: { user: any, login: any }) {
 
         <form className="mt-5 space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label className="block text-sm font-medium text-slate-700">Name</label>
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Name</label>
             <input 
               type="text" 
               value={name} 
               onChange={e => setName(e.target.value)} 
-              className="mt-1 block w-full border border-slate-300 rounded-md py-2 px-3 text-sm focus:ring-blue-500 focus:border-blue-500" 
+              className="mt-1 block w-full border border-slate-300 dark:border-slate-600 rounded-md py-2 px-3 text-sm focus:ring-blue-500 focus:border-blue-500" 
               required
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700">Email</label>
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Email</label>
             <input 
               type="email" 
               value={user?.email || ''} 
               disabled 
-              className="mt-1 block w-full border border-slate-200 bg-slate-50 text-slate-500 rounded-md py-2 px-3 text-sm" 
+              className="mt-1 block w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 text-slate-500 rounded-md py-2 px-3 text-sm" 
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700">Role</label>
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Role</label>
             <input 
               type="text" 
               value={user?.role || ''} 
               disabled 
-              className="mt-1 block w-full border border-slate-200 bg-slate-50 text-slate-500 rounded-md py-2 px-3 text-sm" 
+              className="mt-1 block w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 text-slate-500 rounded-md py-2 px-3 text-sm" 
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700">Status</label>
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Status</label>
             <input 
               type="text" 
               value="ACTIVE"
               disabled 
-              className="mt-1 block w-full border border-slate-200 bg-slate-50 text-slate-500 rounded-md py-2 px-3 text-sm" 
+              className="mt-1 block w-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 text-slate-500 rounded-md py-2 px-3 text-sm" 
             />
           </div>
 
@@ -186,9 +186,9 @@ function SecurityTab() {
   };
 
   return (
-    <div className="bg-white shadow rounded-lg border border-slate-200">
+    <div className="bg-white dark:bg-slate-800 shadow rounded-lg border border-slate-200 dark:border-slate-700">
       <div className="px-4 py-5 sm:p-6">
-        <h3 className="text-lg leading-6 font-medium text-slate-900">Change Password</h3>
+        <h3 className="text-lg leading-6 font-medium text-slate-900 dark:text-slate-100">Change Password</h3>
         <div className="mt-2 max-w-xl text-sm text-slate-500">
           <p>Ensure your account is using a long, random password to stay secure.</p>
         </div>
@@ -198,33 +198,33 @@ function SecurityTab() {
 
         <form className="mt-5 space-y-4" onSubmit={handleSubmit}>
           <div>
-            <label className="block text-sm font-medium text-slate-700">Current Password *</label>
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Current Password *</label>
             <input 
               type="password" 
               value={currentPassword} 
               onChange={e => setCurrentPassword(e.target.value)} 
-              className="mt-1 block w-full border border-slate-300 rounded-md py-2 px-3 text-sm focus:ring-blue-500 focus:border-blue-500" 
+              className="mt-1 block w-full border border-slate-300 dark:border-slate-600 rounded-md py-2 px-3 text-sm focus:ring-blue-500 focus:border-blue-500" 
               required
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700">New Password *</label>
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">New Password *</label>
             <input 
               type="password" 
               value={newPassword} 
               onChange={e => setNewPassword(e.target.value)} 
-              className="mt-1 block w-full border border-slate-300 rounded-md py-2 px-3 text-sm focus:ring-blue-500 focus:border-blue-500" 
+              className="mt-1 block w-full border border-slate-300 dark:border-slate-600 rounded-md py-2 px-3 text-sm focus:ring-blue-500 focus:border-blue-500" 
               minLength={8}
               required
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700">Confirm New Password *</label>
+            <label className="block text-sm font-medium text-slate-700 dark:text-slate-300">Confirm New Password *</label>
             <input 
               type="password" 
               value={confirmPassword} 
               onChange={e => setConfirmPassword(e.target.value)} 
-              className="mt-1 block w-full border border-slate-300 rounded-md py-2 px-3 text-sm focus:ring-blue-500 focus:border-blue-500" 
+              className="mt-1 block w-full border border-slate-300 dark:border-slate-600 rounded-md py-2 px-3 text-sm focus:ring-blue-500 focus:border-blue-500" 
               required
             />
           </div>
@@ -246,9 +246,9 @@ function SecurityTab() {
 
 function SystemTab() {
   return (
-    <div className="bg-white shadow rounded-lg border border-slate-200">
+    <div className="bg-white dark:bg-slate-800 shadow rounded-lg border border-slate-200 dark:border-slate-700">
       <div className="px-4 py-5 sm:p-6">
-        <h3 className="text-lg leading-6 font-medium text-slate-900">System Information</h3>
+        <h3 className="text-lg leading-6 font-medium text-slate-900 dark:text-slate-100">System Information</h3>
         <div className="mt-2 max-w-xl text-sm text-slate-500 mb-6">
           <p>Current application and environment status.</p>
         </div>
@@ -256,15 +256,15 @@ function SystemTab() {
         <dl className="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
           <div className="sm:col-span-1">
             <dt className="text-sm font-medium text-slate-500">Application</dt>
-            <dd className="mt-1 text-sm text-slate-900 font-semibold">Parth Mobile Distribution</dd>
+            <dd className="mt-1 text-sm text-slate-900 dark:text-slate-100 font-semibold">Parth Mobile Distribution</dd>
           </div>
           <div className="sm:col-span-1">
             <dt className="text-sm font-medium text-slate-500">Version</dt>
-            <dd className="mt-1 text-sm text-slate-900 font-mono">1.0.0</dd>
+            <dd className="mt-1 text-sm text-slate-900 dark:text-slate-100 font-mono">1.0.0</dd>
           </div>
           <div className="sm:col-span-1">
             <dt className="text-sm font-medium text-slate-500">Environment</dt>
-            <dd className="mt-1 text-sm text-slate-900">
+            <dd className="mt-1 text-sm text-slate-900 dark:text-slate-100">
               <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                 {import.meta.env.MODE === 'development' ? 'Development' : 'Production'}
               </span>
@@ -272,7 +272,7 @@ function SystemTab() {
           </div>
           <div className="sm:col-span-1">
             <dt className="text-sm font-medium text-slate-500">Backend Status</dt>
-            <dd className="mt-1 text-sm text-slate-900">
+            <dd className="mt-1 text-sm text-slate-900 dark:text-slate-100">
               <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                 Connected
               </span>
@@ -280,7 +280,7 @@ function SystemTab() {
           </div>
           <div className="sm:col-span-1">
             <dt className="text-sm font-medium text-slate-500">Database</dt>
-            <dd className="mt-1 text-sm text-slate-900">
+            <dd className="mt-1 text-sm text-slate-900 dark:text-slate-100">
               <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                 Connected
               </span>

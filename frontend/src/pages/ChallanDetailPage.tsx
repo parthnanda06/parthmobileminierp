@@ -83,10 +83,10 @@ export default function ChallanDetailPage() {
     <div className="space-y-6 max-w-5xl mx-auto">
       <div className="flex items-center justify-between">
         <div className="flex items-center space-x-4">
-          <button onClick={() => navigate('/challans')} className="text-slate-500 hover:text-slate-700">
+          <button onClick={() => navigate('/challans')} className="text-slate-500 hover:text-slate-700 dark:text-slate-300">
             <ArrowLeft className="h-6 w-6" />
           </button>
-          <h1 className="text-2xl font-bold text-slate-900">
+          <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100">
             {challan.challanNumber}
           </h1>
           <span className={`px-3 py-1 inline-flex text-sm font-semibold rounded-full 
@@ -101,14 +101,14 @@ export default function ChallanDetailPage() {
           <div className="flex space-x-3">
             <Link
               to={`/challans/${id}/edit`}
-              className="inline-flex items-center px-4 py-2 border border-slate-300 shadow-sm text-sm font-medium rounded-md text-slate-700 bg-white hover:bg-slate-50"
+              className="inline-flex items-center px-4 py-2 border border-slate-300 dark:border-slate-600 shadow-sm text-sm font-medium rounded-md text-slate-700 dark:text-slate-300 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:bg-slate-900/50"
             >
               <Edit className="h-4 w-4 mr-2" /> Edit Draft
             </Link>
             <button
               onClick={handleCancel}
               disabled={actionLoading}
-              className="inline-flex items-center px-4 py-2 border border-slate-300 shadow-sm text-sm font-medium rounded-md text-red-700 bg-white hover:bg-red-50 disabled:opacity-50"
+              className="inline-flex items-center px-4 py-2 border border-slate-300 dark:border-slate-600 shadow-sm text-sm font-medium rounded-md text-red-700 bg-white dark:bg-slate-800 hover:bg-red-50 disabled:opacity-50"
             >
               <XCircle className="h-4 w-4 mr-2" /> Cancel
             </button>
@@ -135,7 +135,7 @@ export default function ChallanDetailPage() {
           <p className="text-red-700 mt-1">Insufficient stock for the following items:</p>
           <ul className="mt-3 space-y-2">
             {confirmError.map((err: any, idx: number) => (
-              <li key={idx} className="text-sm text-red-600 bg-white p-2 rounded border border-red-100">
+              <li key={idx} className="text-sm text-red-600 bg-white dark:bg-slate-800 p-2 rounded border border-red-100">
                 <span className="font-bold">{err.productName}</span> — Available: {err.available}, Requested: {err.requested}
               </li>
             ))}
@@ -144,25 +144,25 @@ export default function ChallanDetailPage() {
         </div>
       )}
 
-      <div className="bg-white rounded-lg shadow border border-slate-200 overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 rounded-lg shadow border border-slate-200 dark:border-slate-700 overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-2 p-6 gap-6">
           <div>
             <h3 className="text-sm font-medium text-slate-500 uppercase tracking-wider mb-2">Customer Details</h3>
-            <p className="text-lg font-semibold text-slate-900">{challan.customer?.businessName}</p>
-            <p className="text-slate-600">{challan.customer?.address}</p>
-            <p className="text-slate-600">Mobile: {challan.customer?.mobile}</p>
-            {challan.customer?.gstNumber && <p className="text-slate-600">GST: {challan.customer?.gstNumber}</p>}
+            <p className="text-lg font-semibold text-slate-900 dark:text-slate-100">{challan.customer?.businessName}</p>
+            <p className="text-slate-600 dark:text-slate-400">{challan.customer?.address}</p>
+            <p className="text-slate-600 dark:text-slate-400">Mobile: {challan.customer?.mobile}</p>
+            {challan.customer?.gstNumber && <p className="text-slate-600 dark:text-slate-400">GST: {challan.customer?.gstNumber}</p>}
           </div>
           <div>
             <h3 className="text-sm font-medium text-slate-500 uppercase tracking-wider mb-2">Order Information</h3>
-            <p className="text-slate-600"><span className="font-medium text-slate-700">Created:</span> {new Date(challan.createdAt).toLocaleString()}</p>
-            <p className="text-slate-600"><span className="font-medium text-slate-700">Created By:</span> {challan.createdBy?.name} ({challan.createdBy?.role})</p>
+            <p className="text-slate-600 dark:text-slate-400"><span className="font-medium text-slate-700 dark:text-slate-300">Created:</span> {new Date(challan.createdAt).toLocaleString()}</p>
+            <p className="text-slate-600 dark:text-slate-400"><span className="font-medium text-slate-700 dark:text-slate-300">Created By:</span> {challan.createdBy?.name} ({challan.createdBy?.role})</p>
           </div>
         </div>
 
-        <div className="border-t border-slate-200">
-          <table className="min-w-full divide-y divide-slate-200">
-            <thead className="bg-slate-50">
+        <div className="border-t border-slate-200 dark:border-slate-700">
+          <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
+            <thead className="bg-slate-50 dark:bg-slate-900/50">
               <tr>
                 <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase">Product</th>
                 <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase">SKU</th>
@@ -171,14 +171,14 @@ export default function ChallanDetailPage() {
                 <th className="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase">Total</th>
               </tr>
             </thead>
-            <tbody className="bg-white divide-y divide-slate-200">
+            <tbody className="bg-white dark:bg-slate-800 divide-y divide-slate-200 dark:divide-slate-700">
               {challan.items.map((item: any) => (
                 <tr key={item.id}>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">{item.productName}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-slate-100">{item.productName}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">{item.sku}</td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500 text-right">₹{item.unitPrice.toLocaleString()}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-slate-900 text-right">{item.quantity}</td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 text-right font-medium">
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-slate-900 dark:text-slate-100 text-right">{item.quantity}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-900 dark:text-slate-100 text-right font-medium">
                     ₹{(item.quantity * item.unitPrice).toLocaleString()}
                   </td>
                 </tr>
@@ -187,14 +187,14 @@ export default function ChallanDetailPage() {
           </table>
         </div>
         
-        <div className="bg-slate-50 p-6 border-t border-slate-200 flex justify-end space-x-12">
+        <div className="bg-slate-50 dark:bg-slate-900/50 p-6 border-t border-slate-200 dark:border-slate-700 flex justify-end space-x-12">
           <div className="text-right">
             <p className="text-sm text-slate-500">Total Quantity</p>
-            <p className="text-2xl font-bold text-slate-900">{challan.totalQuantity}</p>
+            <p className="text-2xl font-bold text-slate-900 dark:text-slate-100">{challan.totalQuantity}</p>
           </div>
           <div className="text-right">
             <p className="text-sm text-slate-500">Grand Total</p>
-            <p className="text-2xl font-bold text-slate-900">₹{grandTotal.toLocaleString()}</p>
+            <p className="text-2xl font-bold text-slate-900 dark:text-slate-100">₹{grandTotal.toLocaleString()}</p>
           </div>
         </div>
       </div>
@@ -202,16 +202,16 @@ export default function ChallanDetailPage() {
       {showConfirmDialog && (
         <div className="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
           <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-            <div className="fixed inset-0 bg-slate-500 bg-opacity-75 transition-opacity" onClick={() => setShowConfirmDialog(false)}></div>
+            <div className="fixed inset-0 bg-slate-50 dark:bg-slate-900/500 bg-opacity-75 transition-opacity" onClick={() => setShowConfirmDialog(false)}></div>
             <span className="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
-            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+            <div className="inline-block align-bottom bg-white dark:bg-slate-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+              <div className="bg-white dark:bg-slate-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="sm:flex sm:items-start">
                   <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
                     <Check className="h-6 w-6 text-green-600" aria-hidden="true" />
                   </div>
                   <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                    <h3 className="text-lg leading-6 font-medium text-slate-900" id="modal-title">Confirm Sales Challan?</h3>
+                    <h3 className="text-lg leading-6 font-medium text-slate-900 dark:text-slate-100" id="modal-title">Confirm Sales Challan?</h3>
                     <div className="mt-2">
                       <p className="text-sm text-slate-500">
                         This will deduct the selected quantities from current inventory. This action cannot be undone.
@@ -220,7 +220,7 @@ export default function ChallanDetailPage() {
                   </div>
                 </div>
               </div>
-              <div className="bg-slate-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse border-t border-slate-200">
+              <div className="bg-slate-50 dark:bg-slate-900/50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse border-t border-slate-200 dark:border-slate-700">
                 <button
                   type="button"
                   onClick={handleConfirm}
@@ -231,7 +231,7 @@ export default function ChallanDetailPage() {
                 <button
                   type="button"
                   onClick={() => setShowConfirmDialog(false)}
-                  className="mt-3 w-full inline-flex justify-center rounded-md border border-slate-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-slate-700 hover:bg-slate-50 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                  className="mt-3 w-full inline-flex justify-center rounded-md border border-slate-300 dark:border-slate-600 shadow-sm px-4 py-2 bg-white dark:bg-slate-800 text-base font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:bg-slate-900/50 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                 >
                   Cancel
                 </button>

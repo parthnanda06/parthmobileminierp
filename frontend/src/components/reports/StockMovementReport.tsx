@@ -68,50 +68,50 @@ export default function StockMovementReport() {
     <div className="space-y-6">
       {/* Summary Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+        <div className="bg-white dark:bg-slate-800 p-4 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
           <p className="text-sm text-slate-500 font-medium mb-1">Total IN Quantity</p>
           <div className="flex items-center">
             <ArrowDownToLine className="h-5 w-5 text-green-500 mr-2" />
-            <p className="text-2xl font-bold text-slate-900">{data.summary.totalInQuantity}</p>
+            <p className="text-2xl font-bold text-slate-900 dark:text-slate-100">{data.summary.totalInQuantity}</p>
           </div>
         </div>
-        <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+        <div className="bg-white dark:bg-slate-800 p-4 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
           <p className="text-sm text-slate-500 font-medium mb-1">Total OUT Quantity</p>
           <div className="flex items-center">
             <ArrowUpFromLine className="h-5 w-5 text-orange-500 mr-2" />
-            <p className="text-2xl font-bold text-slate-900">{data.summary.totalOutQuantity}</p>
+            <p className="text-2xl font-bold text-slate-900 dark:text-slate-100">{data.summary.totalOutQuantity}</p>
           </div>
         </div>
-        <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm">
+        <div className="bg-white dark:bg-slate-800 p-4 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm">
           <p className="text-sm text-slate-500 font-medium mb-1">Number of Movements</p>
           <div className="flex items-center">
             <ArrowRightLeft className="h-5 w-5 text-blue-500 mr-2" />
-            <p className="text-2xl font-bold text-slate-900">{data.summary.totalMovements}</p>
+            <p className="text-2xl font-bold text-slate-900 dark:text-slate-100">{data.summary.totalMovements}</p>
           </div>
         </div>
       </div>
 
       {/* Filters */}
-      <div className="bg-white p-4 rounded-lg border border-slate-200 shadow-sm flex flex-wrap gap-4 items-end">
+      <div className="bg-white dark:bg-slate-800 p-4 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm flex flex-wrap gap-4 items-end">
         <div>
-          <label className="block text-xs font-medium text-slate-700 mb-1">From Date</label>
-          <input type="date" value={dateFrom} onChange={e => setDateFrom(e.target.value)} className="block w-full border border-slate-300 rounded-md py-2 px-3 text-sm" />
+          <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">From Date</label>
+          <input type="date" value={dateFrom} onChange={e => setDateFrom(e.target.value)} className="block w-full border border-slate-300 dark:border-slate-600 rounded-md py-2 px-3 text-sm" />
         </div>
         <div>
-          <label className="block text-xs font-medium text-slate-700 mb-1">To Date</label>
-          <input type="date" value={dateTo} onChange={e => setDateTo(e.target.value)} className="block w-full border border-slate-300 rounded-md py-2 px-3 text-sm" />
+          <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">To Date</label>
+          <input type="date" value={dateTo} onChange={e => setDateTo(e.target.value)} className="block w-full border border-slate-300 dark:border-slate-600 rounded-md py-2 px-3 text-sm" />
         </div>
         <div>
-          <label className="block text-xs font-medium text-slate-700 mb-1">Movement Type</label>
-          <select value={movementType} onChange={e => setMovementType(e.target.value)} className="block w-full border border-slate-300 rounded-md py-2 px-3 text-sm">
+          <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">Movement Type</label>
+          <select value={movementType} onChange={e => setMovementType(e.target.value)} className="block w-full border border-slate-300 dark:border-slate-600 rounded-md py-2 px-3 text-sm">
             <option value="ALL">All Types</option>
             <option value="IN">IN</option>
             <option value="OUT">OUT</option>
           </select>
         </div>
         <div>
-          <label className="block text-xs font-medium text-slate-700 mb-1">Product</label>
-          <select value={productId} onChange={e => setProductId(e.target.value)} className="block w-full border border-slate-300 rounded-md py-2 px-3 text-sm max-w-xs">
+          <label className="block text-xs font-medium text-slate-700 dark:text-slate-300 mb-1">Product</label>
+          <select value={productId} onChange={e => setProductId(e.target.value)} className="block w-full border border-slate-300 dark:border-slate-600 rounded-md py-2 px-3 text-sm max-w-xs">
             <option value="ALL">All Products</option>
             {products.map(p => (
               <option key={p.id} value={p.id}>{p.productName}</option>
@@ -121,13 +121,13 @@ export default function StockMovementReport() {
       </div>
 
       {/* Table */}
-      <div className="bg-white rounded-lg border border-slate-200 shadow-sm overflow-hidden">
+      <div className="bg-white dark:bg-slate-800 rounded-lg border border-slate-200 dark:border-slate-700 shadow-sm overflow-hidden">
         {data.data.length === 0 ? (
           <div className="p-8 text-center text-slate-500">No records found for the selected filters.</div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-slate-200">
-              <thead className="bg-slate-50">
+            <table className="min-w-full divide-y divide-slate-200 dark:divide-slate-700">
+              <thead className="bg-slate-50 dark:bg-slate-900/50">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Date & Time</th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Product</th>
@@ -138,13 +138,13 @@ export default function StockMovementReport() {
                   <th className="px-6 py-3 text-left text-xs font-medium text-slate-500 uppercase tracking-wider">Created By</th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-slate-200">
+              <tbody className="bg-white dark:bg-slate-800 divide-y divide-slate-200 dark:divide-slate-700">
                 {data.data.map((m: any) => (
                   <tr key={m.id}>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
                       {new Date(m.createdAt).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' })}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">{m.product.productName}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-slate-100">{m.product.productName}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">{m.product.sku}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-center">
                       <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
@@ -152,7 +152,7 @@ export default function StockMovementReport() {
                         {m.movementType}
                       </span>
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-slate-900 text-right">{m.quantity}</td>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-semibold text-slate-900 dark:text-slate-100 text-right">{m.quantity}</td>
                     <td className="px-6 py-4 text-sm text-slate-500 max-w-xs truncate" title={m.reason}>{m.reason}</td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-500">{m.createdBy.name}</td>
                   </tr>

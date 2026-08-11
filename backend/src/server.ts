@@ -12,6 +12,7 @@ import userRoutes from './routes/userRoutes';
 import dashboardRoutes from './routes/dashboardRoutes';
 import reportRoutes from './routes/reportRoutes';
 import settingsRoutes from './routes/settingsRoutes';
+import notificationRoutes from './routes/notificationRoutes';
 
 // Load env vars
 dotenv.config();
@@ -41,6 +42,7 @@ app.use('/api/users', userRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/reports', reportRoutes);
 app.use('/api/settings', settingsRoutes);
+app.use('/api/notifications', notificationRoutes);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

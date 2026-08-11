@@ -77,18 +77,18 @@ export default function CustomerDetailPage() {
   return (
     <div className="space-y-6 max-w-5xl mx-auto">
       <div>
-        <Link to="/customers" className="inline-flex items-center text-sm font-medium text-slate-500 hover:text-slate-700 mb-4">
+        <Link to="/customers" className="inline-flex items-center text-sm font-medium text-slate-500 hover:text-slate-700 dark:text-slate-300 mb-4">
           <ArrowLeft className="mr-1 h-4 w-4" />
           Back to Customers
         </Link>
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-slate-900 flex items-center space-x-3">
+            <h1 className="text-2xl font-bold text-slate-900 dark:text-slate-100 flex items-center space-x-3">
               <span>{customer.businessName}</span>
               <span className={`px-2.5 py-0.5 text-xs font-semibold rounded-full 
                 ${customer.status === 'ACTIVE' ? 'bg-green-100 text-green-800' : 
                   customer.status === 'LEAD' ? 'bg-blue-100 text-blue-800' : 
-                  'bg-slate-100 text-slate-800'}`}>
+                  'bg-slate-100 dark:bg-slate-700/50 text-slate-800 dark:text-slate-200'}`}>
                 {customer.status}
               </span>
             </h1>
@@ -100,51 +100,51 @@ export default function CustomerDetailPage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white shadow rounded-lg p-6 border border-slate-200">
-          <h2 className="text-lg font-medium text-slate-900 mb-4 border-b border-slate-100 pb-2">Contact Information</h2>
+        <div className="bg-white dark:bg-slate-800 shadow rounded-lg p-6 border border-slate-200 dark:border-slate-700">
+          <h2 className="text-lg font-medium text-slate-900 dark:text-slate-100 mb-4 border-b border-slate-100 pb-2">Contact Information</h2>
           <dl className="space-y-3 text-sm">
             <div>
               <dt className="text-slate-500 font-medium">Name</dt>
-              <dd className="text-slate-900 mt-1">{customer.customerName}</dd>
+              <dd className="text-slate-900 dark:text-slate-100 mt-1">{customer.customerName}</dd>
             </div>
             <div>
               <dt className="text-slate-500 font-medium">Mobile</dt>
-              <dd className="text-slate-900 mt-1">{customer.mobile}</dd>
+              <dd className="text-slate-900 dark:text-slate-100 mt-1">{customer.mobile}</dd>
             </div>
             <div>
               <dt className="text-slate-500 font-medium">Email</dt>
-              <dd className="text-slate-900 mt-1">{customer.email || '-'}</dd>
+              <dd className="text-slate-900 dark:text-slate-100 mt-1">{customer.email || '-'}</dd>
             </div>
           </dl>
         </div>
 
-        <div className="bg-white shadow rounded-lg p-6 border border-slate-200">
-          <h2 className="text-lg font-medium text-slate-900 mb-4 border-b border-slate-100 pb-2">Business Information</h2>
+        <div className="bg-white dark:bg-slate-800 shadow rounded-lg p-6 border border-slate-200 dark:border-slate-700">
+          <h2 className="text-lg font-medium text-slate-900 dark:text-slate-100 mb-4 border-b border-slate-100 pb-2">Business Information</h2>
           <dl className="space-y-3 text-sm">
             <div>
               <dt className="text-slate-500 font-medium">GST Number</dt>
-              <dd className="text-slate-900 mt-1">{customer.gstNumber || '-'}</dd>
+              <dd className="text-slate-900 dark:text-slate-100 mt-1">{customer.gstNumber || '-'}</dd>
             </div>
             <div>
               <dt className="text-slate-500 font-medium">Type</dt>
-              <dd className="text-slate-900 mt-1 capitalize">{customer.customerType.toLowerCase()}</dd>
+              <dd className="text-slate-900 dark:text-slate-100 mt-1 capitalize">{customer.customerType.toLowerCase()}</dd>
             </div>
             <div>
               <dt className="text-slate-500 font-medium">Internal Notes</dt>
-              <dd className="text-slate-900 mt-1">{customer.notes || '-'}</dd>
+              <dd className="text-slate-900 dark:text-slate-100 mt-1">{customer.notes || '-'}</dd>
             </div>
           </dl>
         </div>
 
-        <div className="bg-white shadow rounded-lg p-6 border border-slate-200">
-          <h2 className="text-lg font-medium text-slate-900 mb-4 border-b border-slate-100 pb-2">Address</h2>
-          <p className="text-sm text-slate-900 whitespace-pre-wrap">{customer.address}</p>
+        <div className="bg-white dark:bg-slate-800 shadow rounded-lg p-6 border border-slate-200 dark:border-slate-700">
+          <h2 className="text-lg font-medium text-slate-900 dark:text-slate-100 mb-4 border-b border-slate-100 pb-2">Address</h2>
+          <p className="text-sm text-slate-900 dark:text-slate-100 whitespace-pre-wrap">{customer.address}</p>
         </div>
       </div>
 
-      <div className="bg-white shadow rounded-lg border border-slate-200 overflow-hidden">
-        <div className="px-6 py-4 border-b border-slate-200 bg-slate-50 flex items-center justify-between">
-          <h2 className="text-lg font-medium text-slate-900">Follow-up History</h2>
+      <div className="bg-white dark:bg-slate-800 shadow rounded-lg border border-slate-200 dark:border-slate-700 overflow-hidden">
+        <div className="px-6 py-4 border-b border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-900/50 flex items-center justify-between">
+          <h2 className="text-lg font-medium text-slate-900 dark:text-slate-100">Follow-up History</h2>
           <button
             onClick={() => setIsFollowUpModalOpen(true)}
             className="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded text-blue-700 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
@@ -173,9 +173,9 @@ export default function CustomerDetailPage() {
                         </div>
                         <div className="min-w-0 flex-1 pt-1.5 flex justify-between space-x-4">
                           <div>
-                            <p className="text-sm text-slate-900 whitespace-pre-wrap">{followUp.note}</p>
+                            <p className="text-sm text-slate-900 dark:text-slate-100 whitespace-pre-wrap">{followUp.note}</p>
                             <p className="mt-1 text-xs text-slate-500">
-                              Created by: <span className="font-medium text-slate-900">{followUp.createdBy.name}</span> &mdash; {followUp.createdBy.role}
+                              Created by: <span className="font-medium text-slate-900 dark:text-slate-100">{followUp.createdBy.name}</span> &mdash; {followUp.createdBy.role}
                             </p>
                           </div>
                           <div className="text-right text-xs whitespace-nowrap text-slate-500">
