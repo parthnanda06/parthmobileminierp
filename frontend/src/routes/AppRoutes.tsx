@@ -5,6 +5,9 @@ import DashboardPage from '../pages/DashboardPage';
 import PlaceholderPage from '../pages/PlaceholderPage';
 import CustomersPage from '../pages/CustomersPage';
 import CustomerDetailPage from '../pages/CustomerDetailPage';
+import ProductsPage from '../pages/ProductsPage';
+import InventoryPage from '../pages/InventoryPage';
+import StockMovementsPage from '../pages/StockMovementsPage';
 import ProtectedRoute from '../components/ProtectedRoute';
 
 export default function AppRoutes() {
@@ -21,9 +24,14 @@ export default function AppRoutes() {
             <Route path="/customers" element={<CustomersPage />} />
             <Route path="/customers/:id" element={<CustomerDetailPage />} />
           </Route>
-          <Route path="/products" element={<PlaceholderPage title="Products" description="Manage product catalog." />} />
-          <Route path="/inventory" element={<PlaceholderPage title="Inventory" description="Manage warehouse inventory." />} />
-          <Route path="/stock-movements" element={<PlaceholderPage title="Stock Movements" description="Track inward and outward stock." />} />
+          
+          {/* Admin & Warehouse only routes */}
+          <Route element={<ProtectedRoute allowedRoles={['ADMIN', 'WAREHOUSE']} />}>
+            <Route path="/products" element={<ProductsPage />} />
+            <Route path="/inventory" element={<InventoryPage />} />
+            <Route path="/stock-movements" element={<StockMovementsPage />} />
+          </Route>
+          
           <Route path="/challans" element={<PlaceholderPage title="Sales Challans" description="Manage sales orders and challans." />} />
           <Route path="/users" element={<ProtectedRoute allowedRoles={['ADMIN']} />}>
             <Route index element={<PlaceholderPage title="Users" description="Manage application users." />} />
