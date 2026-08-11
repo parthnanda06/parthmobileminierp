@@ -10,8 +10,7 @@ import {
   PieChart
 } from 'lucide-react';
 
-// Mock role for now
-const CURRENT_ROLE = 'ADMIN'; 
+import { useAuth } from '../context/AuthContext';
 
 const navigationByRole = {
   ADMIN: [
@@ -47,6 +46,8 @@ const navigationByRole = {
 
 export default function Sidebar() {
   const location = useLocation();
+  const { user } = useAuth();
+  const CURRENT_ROLE = user?.role || 'SALES';
   const navItems = navigationByRole[CURRENT_ROLE as keyof typeof navigationByRole] || [];
 
   return (

@@ -1,6 +1,10 @@
 import { Bell, Search, User } from 'lucide-react';
 
+import { useAuth } from '../context/AuthContext';
+
 export default function Topbar() {
+  const { user, logout } = useAuth();
+
   return (
     <header className="bg-white border-b border-slate-200 h-16 flex items-center justify-between px-6 z-10 shadow-sm">
       <div className="flex-1 flex items-center">
@@ -22,12 +26,16 @@ export default function Topbar() {
         </button>
         <div className="flex items-center space-x-3 border-l border-slate-200 pl-4">
           <div className="flex flex-col text-right">
-            <span className="text-sm font-semibold text-slate-700">Admin User</span>
-            <span className="text-xs text-slate-500">Administrator</span>
+            <span className="text-sm font-semibold text-slate-700">{user?.name || 'Loading...'}</span>
+            <span className="text-xs text-slate-500">{user?.role || ''}</span>
           </div>
-          <div className="h-9 w-9 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold">
+          <button 
+            onClick={logout}
+            className="h-9 w-9 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 font-bold hover:bg-blue-200 transition-colors"
+            title="Logout"
+          >
             <User className="h-5 w-5" />
-          </div>
+          </button>
         </div>
       </div>
     </header>
