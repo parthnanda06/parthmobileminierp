@@ -13,14 +13,13 @@ import { Role } from '@prisma/client';
 const router = Router();
 
 router.use(authenticate);
-router.use(authorizeRoles(Role.ADMIN, Role.WAREHOUSE));
-
 router.get('/', getProductsHandler);
 router.get('/:id', getProductByIdHandler);
-router.post('/', createProductHandler);
-router.put('/:id', updateProductHandler);
+
+router.post('/', authorizeRoles(Role.ADMIN, Role.WAREHOUSE), createProductHandler);
+router.put('/:id', authorizeRoles(Role.ADMIN, Role.WAREHOUSE), updateProductHandler);
 
 // Stock IN API
-router.post('/:id/stock-in', addStockHandler);
+router.post('/:id/stock-in', authorizeRoles(Role.ADMIN, Role.WAREHOUSE), addStockHandler);
 
 export default router;

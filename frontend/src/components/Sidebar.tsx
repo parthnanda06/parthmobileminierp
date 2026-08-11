@@ -35,6 +35,7 @@ const navigationByRole = {
     { name: 'Products', path: '/products', icon: Package },
     { name: 'Inventory', path: '/inventory', icon: Boxes },
     { name: 'Stock Movements', path: '/stock-movements', icon: ArrowRightLeft },
+    { name: 'Sales Challans', path: '/challans', icon: FileText },
     { name: 'Reports', path: '/reports', icon: PieChart },
   ],
   ACCOUNTS: [

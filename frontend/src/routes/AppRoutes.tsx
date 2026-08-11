@@ -11,6 +11,7 @@ import StockMovementsPage from '../pages/StockMovementsPage';
 import ChallansPage from '../pages/ChallansPage';
 import ChallanFormPage from '../pages/ChallanFormPage';
 import ChallanDetailPage from '../pages/ChallanDetailPage';
+import UsersPage from '../pages/UsersPage';
 import ProtectedRoute from '../components/ProtectedRoute';
 
 export default function AppRoutes() {
@@ -34,6 +35,11 @@ export default function AppRoutes() {
             <Route path="/inventory" element={<InventoryPage />} />
             <Route path="/stock-movements" element={<StockMovementsPage />} />
           </Route>
+          
+          <Route element={<ProtectedRoute allowedRoles={['ADMIN']} />}>
+            <Route path="/users" element={<UsersPage />} />
+          </Route>
+
           {/* Challans are accessible by all, but internal permissions differ */}
           <Route path="/challans" element={<ChallansPage />} />
           <Route path="/challans/:id" element={<ChallanDetailPage />} />

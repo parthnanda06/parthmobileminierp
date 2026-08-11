@@ -26,7 +26,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     }
 
     if (user.status !== 'ACTIVE') {
-      res.status(403).json({ success: false, message: 'User account is inactive' });
+      res.status(401).json({ success: false, message: 'Your account is inactive. Please contact an administrator.' });
       return;
     }
 
