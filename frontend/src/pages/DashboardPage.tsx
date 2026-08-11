@@ -1,25 +1,68 @@
+import { useState, useEffect } from 'react';
 import { Users, Package, AlertTriangle, FileText, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
-const kpiData = [
-  { title: 'Total Customers', value: '250', icon: Users, color: 'text-blue-600', bg: 'bg-blue-100' },
-  { title: 'Total Products', value: '85', icon: Package, color: 'text-indigo-600', bg: 'bg-indigo-100' },
-  { title: 'Low Stock Items', value: '8', icon: AlertTriangle, color: 'text-amber-600', bg: 'bg-amber-100' },
-  { title: 'Total Challans', value: '430', icon: FileText, color: 'text-emerald-600', bg: 'bg-emerald-100' }
-];
-
-const recentChallans = [
-  { id: 'CH-2024-001', customer: 'ABC Mobile Store', date: '2024-05-15', amount: '₹1,25,000', status: 'Delivered' },
-  { id: 'CH-2024-002', customer: 'Shree Telecom', date: '2024-05-16', amount: '₹45,500', status: 'Pending' },
-  { id: 'CH-2024-003', customer: 'Raj Mobiles', date: '2024-05-17', amount: '₹3,10,000', status: 'Processing' },
-  { id: 'CH-2024-004', customer: 'Digital World', date: '2024-05-18', amount: '₹85,000', status: 'Delivered' },
-];
+import api from '../utils/api';
 
 export default function DashboardPage() {
+  const [stats, setStats] = useState({
+    customers: 0,
+    products: 0,
+    lowStock: 0,
+    challans: 0,
+    recentChallans: [] as any[],
+    lowStockItems: [] as any[]
+  });
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        const [custRes, prodRes, challanRes] = await Promise.all([
+          api.get('/customers', { params: { limit: 1 } }), // just need total
+          api.get('/products', { params: { limit: 100 } }),
+          api.get('/challans', { params: { limit: 4 } })
+        ]);
+
+        const products = prodRes.data.data.products || [];
+        const lowStockProducts = products.filter((p: any) => p.currentStock <= p.minimumStock);
+
+        setStats({
+          customers: custRes.data.data.pagination.total || 0,
+          products: prodRes.data.data.pagination.total || 0,
+          lowStock: lowStockProducts.length,
+          challans: challanRes.data.data.pagination.total || 0,
+          recentChallans: challanRes.data.data.challans || [],
+          lowStockItems: lowStockProducts.slice(0, 4)
+        });
+      } catch (err) {
+        console.error('Failed to load dashboard data');
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchDashboardData();
+  }, []);
+
+  const kpiData = [
+    { title: 'Total Customers', value: stats.customers, icon: Users, color: 'text-blue-600', bg: 'bg-blue-100' },
+    { title: 'Total Products', value: stats.products, icon: Package, color: 'text-indigo-600', bg: 'bg-indigo-100' },
+    { title: 'Low Stock Items', value: stats.lowStock, icon: AlertTriangle, color: 'text-amber-600', bg: 'bg-amber-100' },
+    { title: 'Total Challans', value: stats.challans, icon: FileText, color: 'text-emerald-600', bg: 'bg-emerald-100' }
+  ];
+
+  const getStatusBadgeClass = (status: string) => {
+    switch (status) {
+      case 'DRAFT': return 'bg-yellow-100 text-yellow-800';
+      case 'CONFIRMED': return 'bg-green-100 text-green-800';
+      case 'CANCELLED': return 'bg-red-100 text-red-800';
+      default: return 'bg-slate-100 text-slate-800';
+    }
+  };
+
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-slate-900">Admin Dashboard</h1>
+        <h1 className="text-2xl font-bold text-slate-900">Dashboard</h1>
         <p className="mt-1 text-sm text-slate-500">Overview of your business operations.</p>
       </div>
 
@@ -39,7 +82,7 @@ export default function DashboardPage() {
                     <dl>
                       <dt className="truncate text-sm font-medium text-slate-500">{item.title}</dt>
                       <dd>
-                        <div className="text-lg font-bold text-slate-900">{item.value}</div>
+                        <div className="text-lg font-bold text-slate-900">{loading ? '...' : item.value}</div>
                       </dd>
                     </dl>
                   </div>
@@ -59,34 +102,36 @@ export default function DashboardPage() {
             </Link>
           </div>
           <div className="px-6 py-5">
-            <table className="min-w-full divide-y divide-slate-200">
-              <thead>
-                <tr>
-                  <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider pb-3">Challan ID</th>
-                  <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider pb-3">Customer</th>
-                  <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider pb-3">Amount</th>
-                  <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider pb-3">Status</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-slate-100">
-                {recentChallans.map((challan) => (
-                  <tr key={challan.id}>
-                    <td className="py-3 text-sm font-medium text-slate-900">{challan.id}</td>
-                    <td className="py-3 text-sm text-slate-500">{challan.customer}</td>
-                    <td className="py-3 text-sm text-slate-900 font-medium">{challan.amount}</td>
-                    <td className="py-3 text-sm">
-                      <span className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset ${
-                        challan.status === 'Delivered' ? 'bg-emerald-50 text-emerald-700 ring-emerald-600/20' : 
-                        challan.status === 'Pending' ? 'bg-amber-50 text-amber-700 ring-amber-600/20' : 
-                        'bg-blue-50 text-blue-700 ring-blue-600/20'
-                      }`}>
-                        {challan.status}
-                      </span>
-                    </td>
+            {loading ? (
+              <p className="text-sm text-slate-500">Loading...</p>
+            ) : stats.recentChallans.length === 0 ? (
+              <p className="text-sm text-slate-500">No recent challans.</p>
+            ) : (
+              <table className="min-w-full divide-y divide-slate-200">
+                <thead>
+                  <tr>
+                    <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider pb-3">Challan No</th>
+                    <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider pb-3">Customer</th>
+                    <th className="text-left text-xs font-medium text-slate-500 uppercase tracking-wider pb-3">Status</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-slate-100">
+                  {stats.recentChallans.map((challan) => (
+                    <tr key={challan.id}>
+                      <td className="py-3 text-sm font-bold text-slate-900">
+                        <Link to={`/challans/${challan.id}`} className="hover:underline">{challan.challanNumber}</Link>
+                      </td>
+                      <td className="py-3 text-sm text-slate-500">{challan.customer?.businessName}</td>
+                      <td className="py-3 text-sm">
+                        <span className={`inline-flex text-xs leading-5 font-semibold rounded-full px-2 ${getStatusBadgeClass(challan.status)}`}>
+                          {challan.status}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
           </div>
         </div>
 
@@ -98,31 +143,32 @@ export default function DashboardPage() {
             </Link>
           </div>
           <div className="px-6 py-5">
-            <ul className="divide-y divide-slate-100">
-              {[
-                { name: 'iPhone 15 128GB Black', stock: 2, min: 5 },
-                { name: 'Samsung Galaxy S24 Ultra', stock: 1, min: 3 },
-                { name: 'OnePlus 12 256GB Green', stock: 0, min: 5 },
-                { name: 'Vivo V30 Pro', stock: 3, min: 10 },
-              ].map((product) => (
-                <li key={product.name} className="py-3 flex justify-between items-center">
-                  <div className="flex items-center">
-                    <div className="h-8 w-8 rounded bg-slate-100 flex items-center justify-center mr-3">
-                      <Package className="h-4 w-4 text-slate-500" />
+            {loading ? (
+              <p className="text-sm text-slate-500">Loading...</p>
+            ) : stats.lowStockItems.length === 0 ? (
+              <p className="text-sm text-slate-500">No low stock items.</p>
+            ) : (
+              <ul className="divide-y divide-slate-100">
+                {stats.lowStockItems.map((product) => (
+                  <li key={product.id} className="py-3 flex justify-between items-center">
+                    <div className="flex items-center">
+                      <div className="h-8 w-8 rounded bg-slate-100 flex items-center justify-center mr-3">
+                        <Package className="h-4 w-4 text-slate-500" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium text-slate-900">{product.productName}</p>
+                        <p className="text-xs text-slate-500">Min. required: {product.minimumStock}</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-sm font-medium text-slate-900">{product.name}</p>
-                      <p className="text-xs text-slate-500">Min. required: {product.min}</p>
+                    <div className="text-right">
+                      <span className={`text-sm font-bold ${product.currentStock === 0 ? 'text-red-600' : 'text-amber-600'}`}>
+                        {product.currentStock} left
+                      </span>
                     </div>
-                  </div>
-                  <div className="text-right">
-                    <span className={`text-sm font-bold ${product.stock === 0 ? 'text-red-600' : 'text-amber-600'}`}>
-                      {product.stock} left
-                    </span>
-                  </div>
-                </li>
-              ))}
-            </ul>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
       </div>

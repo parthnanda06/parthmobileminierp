@@ -15,6 +15,7 @@ import testRoutes from './routes/testRoutes';
 import customerRoutes from './routes/customerRoutes';
 import productRoutes from './routes/productRoutes';
 import stockMovementRoutes from './routes/stockMovementRoutes';
+import challanRoutes from './routes/challanRoutes';
 
 app.get('/api/health', (req: Request, res: Response) => {
   res.json({
@@ -28,6 +29,7 @@ app.use('/api/test', testRoutes);
 app.use('/api/customers', customerRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/stock-movements', stockMovementRoutes);
+app.use('/api/challans', challanRoutes);
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);

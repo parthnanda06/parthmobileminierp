@@ -8,6 +8,9 @@ import CustomerDetailPage from '../pages/CustomerDetailPage';
 import ProductsPage from '../pages/ProductsPage';
 import InventoryPage from '../pages/InventoryPage';
 import StockMovementsPage from '../pages/StockMovementsPage';
+import ChallansPage from '../pages/ChallansPage';
+import ChallanFormPage from '../pages/ChallanFormPage';
+import ChallanDetailPage from '../pages/ChallanDetailPage';
 import ProtectedRoute from '../components/ProtectedRoute';
 
 export default function AppRoutes() {
@@ -31,11 +34,14 @@ export default function AppRoutes() {
             <Route path="/inventory" element={<InventoryPage />} />
             <Route path="/stock-movements" element={<StockMovementsPage />} />
           </Route>
-          
-          <Route path="/challans" element={<PlaceholderPage title="Sales Challans" description="Manage sales orders and challans." />} />
-          <Route path="/users" element={<ProtectedRoute allowedRoles={['ADMIN']} />}>
-            <Route index element={<PlaceholderPage title="Users" description="Manage application users." />} />
+          {/* Challans are accessible by all, but internal permissions differ */}
+          <Route path="/challans" element={<ChallansPage />} />
+          <Route path="/challans/:id" element={<ChallanDetailPage />} />
+          <Route element={<ProtectedRoute allowedRoles={['ADMIN', 'SALES']} />}>
+            <Route path="/challans/new" element={<ChallanFormPage />} />
+            <Route path="/challans/:id/edit" element={<ChallanFormPage />} />
           </Route>
+
           <Route path="/reports" element={<PlaceholderPage title="Reports" description="View business reports." />} />
           <Route path="/settings" element={<PlaceholderPage title="Settings" description="Application settings." />} />
         </Route>
