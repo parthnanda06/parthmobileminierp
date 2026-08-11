@@ -3,6 +3,8 @@ import MainLayout from '../layouts/MainLayout';
 import LoginPage from '../pages/LoginPage';
 import DashboardPage from '../pages/DashboardPage';
 import PlaceholderPage from '../pages/PlaceholderPage';
+import CustomersPage from '../pages/CustomersPage';
+import CustomerDetailPage from '../pages/CustomerDetailPage';
 import ProtectedRoute from '../components/ProtectedRoute';
 
 export default function AppRoutes() {
@@ -13,7 +15,12 @@ export default function AppRoutes() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<DashboardPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/customers" element={<PlaceholderPage title="Customers" description="Manage customer relationships, contact information, business details and follow-ups." />} />
+          
+          {/* Admin & Sales only routes */}
+          <Route element={<ProtectedRoute allowedRoles={['ADMIN', 'SALES']} />}>
+            <Route path="/customers" element={<CustomersPage />} />
+            <Route path="/customers/:id" element={<CustomerDetailPage />} />
+          </Route>
           <Route path="/products" element={<PlaceholderPage title="Products" description="Manage product catalog." />} />
           <Route path="/inventory" element={<PlaceholderPage title="Inventory" description="Manage warehouse inventory." />} />
           <Route path="/stock-movements" element={<PlaceholderPage title="Stock Movements" description="Track inward and outward stock." />} />
